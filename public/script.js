@@ -16,11 +16,14 @@ async function loadBooks() {
 function renderBook(book) {
     return `
         <div class="task">
-            <strong>${book.title}</strong><br>
-            Author: ${book.author}<br>
-            Year: ${book.year}<br>
-            Genre: ${book.genre}<br>
-            Read: <input type="checkbox" ${book.read ? 'checked' : ''} onchange="toggleRead('${book._id}', this.checked)">
+            <strong>${book.title}</strong>
+            <span>Author: ${book.author}</span>
+            <span>Year: ${book.year}</span>
+            <span>Genre: ${book.genre}</span>
+            <label class="read-label">
+                <input type="checkbox" class="read-checkbox" ${book.read ? 'checked' : ''} onchange="toggleRead('${book._id}', this.checked)">
+                Read
+            </label>
             <button class="delete-button" onclick="deleteBook('${book._id}')">Delete</button>
         </div>
     `;

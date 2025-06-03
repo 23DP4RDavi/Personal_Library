@@ -1,0 +1,27 @@
+{
+  "name": "personal_library",
+  "version": "1.0.0",
+  "description": "silly goofy",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/23DP4RDavi/Personal_Library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/23DP4RDavi/Personal_Library/issues"
+  },
+  "homepage": "https://github.com/23DP4RDavi/Personal_Library#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1"
+  }
+}

@@ -1,31 +1,36 @@
 * {
-    font-family: 'Comic Sans MS';
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     color: #2c3e50;
-    line-height: 1.6;
+    box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #2d89ef 0%, #6dd5ed 100%);
+    background-image: url(https://static.lsm.lv/media/2018/03/large/1/93fn.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh;
 }
 
 h1 {
     text-align: center;
-    margin-top: 20px;
-    color: #2d89ef;
-    font-size: 36px;
-    font-weight: bold;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 18px;
+    color: #34495e;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: none;
 }
 
 .container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-width: 420px;
+    margin: 48px auto;
+    padding: 32px 22px 24px 22px;
+    background: rgba(222, 222, 226, 0.75);
+    border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.10);
 }
 
 .header-bar {
@@ -36,7 +41,7 @@ h1 {
 #greeting {
     font-size: 50px;
     font-weight: 900;
-    color: #2d89ef;
+    color: #34495e;
     letter-spacing: 1px;
     text-align: center;
     margin-bottom: 10px;
@@ -45,7 +50,7 @@ h1 {
 }
 
 .logout-btn {
-    background: #e74c3c;
+    background: #34495e;
     color: #fff;
     border: none;
     padding: 6px 16px;
@@ -59,115 +64,172 @@ h1 {
 }
 
 .logout-btn:hover {
-    background: #c0392b;
+    background: #34495e;
     transform: scale(1.05);
 }
 
 form {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #tasks {
     margin-top: 20px;
 }
 
-.task {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.task:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-button {
-    display: block;
-    width: 100%;
-    background-color: #2d89ef;
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #1e6bb8;
-    transform: scale(1.02);
-}
-
 input, select {
-    display: block;
     width: 100%;
-    padding: 14px;
-    margin: 10px 0;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #fdfdfd;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    padding: 12px;
+    border: 1.5px solid #e3eaf3;
+    border-radius: 7px;
+    font-size: 15px;
+    background: #f8fafc;
+    transition: border-color 0.2s;
 }
 
 input:focus, select:focus {
-    border-color: #2d89ef;
+    border-color: #34495e;
+    background: #fff;
     outline: none;
-    box-shadow: 0 0 8px rgba(45, 137, 239, 0.5);
 }
 
-#title, #description {
-    display: block;
-    margin: 12px auto;
+button, .delete-button {
+    width: 100%;
+    background: #34495e;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.15s;
+    margin-top: 8px;
+    box-shadow: 0 2px 8px rgba(45,137,239,0.07);
 }
 
-#tasks .task strong {
-    font-size: 18px;
-    color: #2c3e50;
-    display: block;
-    margin-bottom: 8px;
-}
-
-#tasks .task p {
-    font-size: 14px;
-    color: #7f8c8d;
-    margin: 0;
-}
-
-#tasks .task .status {
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #2d89ef;
-}
-
-#tasks .task .urgency {
-    font-size: 14px;
-    font-weight: bold;
-    color: #e74c3c;
+button:hover, .delete-button:hover {
+    background: #34495e;
+    transform: scale(1.03);
 }
 
 .delete-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    background: #34495e;
+    margin-top: 10px;
 }
 
 .delete-button:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
+    background: #34495e;
+}
+
+#tasks .task {
+    background: #f8fafc;
+    border: 1.5px solid #e3eaf3;
+    padding: 18px 16px 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(45,137,239,0.04);
+    transition: box-shadow 0.18s, transform 0.18s;
+}
+
+#tasks .task:hover {
+    box-shadow: 0 4px 16px rgba(45,137,239,0.10);
+    transform: translateY(-2px) scale(1.01);
+}
+
+#tasks .task strong {
+    font-size: 1.1rem;
+    color: #34495e;
+    font-weight: 700;
+    margin-bottom: 2px;
+    display: block;
+}
+
+#tasks .task span {
+    font-size: 14px;
+    color: #34495e;
+    margin: 2px 0;
+    display: block;
+}
+
+.read-label {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+}
+
+.read-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 2px solid #34495e;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    outline: none;
+    box-shadow: 0 1px 2px #2d89ef22;
+}
+
+.read-checkbox:checked {
+    background: #34495e;
+    border-color: #34495e;
+}
+
+.read-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    border-radius: 1px;
+    transform: rotate(45deg);
+}
+
+#books {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.task {
+    background: #f8fafc;
+    border: 1.5px solid #e3eaf3;
+    padding: 18px 16px 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(45,137,239,0.04);
+    transition: box-shadow 0.18s, transform 0.18s;
+}
+
+.task:hover {
+    box-shadow: 0 4px 16px rgba(45,137,239,0.10);
+    transform: translateY(-2px) scale(1.01);
+}
+
+.task strong {
+    font-size: 1.1rem;
+    color: #34495e;
+    font-weight: 700;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.task span {
+    font-size: 14px;
+    color: #34495e;
+    margin: 2px 0;
+    display: block;
 }
