@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header-bar">
+      <div class="greeting-logout">
+        <span id="greeting"></span>
+        <button id="logout-btn" class="logout-btn">Logout</button>
+      </div>
+    </div>
+    <h1>Todo List</h1>
+    <form id="task-form">
+      <input id="title" type="text" placeholder="Enter task title" required>
+      <input id="description" type="text" placeholder="Enter task description" required>
+      <select id="status">
+        <option value="not started">Not Started</option>
+        <option value="started">Started</option>
+        <option value="almost done">Almost Done</option>
+        <option value="finished">Finished</option>
+      </select>
+      <select id="urgency">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+    <div id="tasks"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
