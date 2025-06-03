@@ -21,7 +21,7 @@ mongoose.connect('mongodb+srv://user:Fifa0000@cluster0.myeqn.mongodb.net/todo-ap
 app.use(express.json());
 
 // API routes
-app.use('/api/tasks', require('./routes/tasks'));
+app.use('/api/book', require('./routes/book'));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
