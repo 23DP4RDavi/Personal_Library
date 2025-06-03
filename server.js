@@ -22,7 +22,6 @@ app.use(express.json());
 
 // API routes
 app.use('/api/tasks', require('./routes/tasks'));
-app.use('/api/auth', require('./routes/auth'));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
