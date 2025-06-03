@@ -9,9 +9,9 @@
 body {
     background-image: url(https://static.lsm.lv/media/2018/03/large/1/93fn.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center;
     min-height: 100vh;
+    background-repeat: repeat-y;
 }
 
 h1 {
@@ -27,15 +27,19 @@ h1 {
 .container {
     max-width: 420px;
     margin: 48px auto;
-    padding: 32px 22px 24px 22px;
-    background: rgba(222, 222, 226, 0.75);
+    padding: 32px 22px 24px;
+    background: rgba(222,222,226,0.75);
     border-radius: 5px;
     box-shadow: 0 8px 32px rgba(44,62,80,0.10);
 }
 
-.header-bar {
+.header-bar,
+.greeting-logout {
     align-items: center;
     margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 #greeting {
@@ -43,29 +47,9 @@ h1 {
     font-weight: 900;
     color: #34495e;
     letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    text-align: left;
+    margin: 0;
     display: block;
-}
-
-.logout-btn {
-    background: #34495e;
-    color: #fff;
-    border: none;
-    padding: 6px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
-    margin-left: 12px;
-}
-
-.logout-btn:hover {
-    background: #34495e;
-    transform: scale(1.05);
 }
 
 form {
@@ -75,11 +59,14 @@ form {
     gap: 10px;
 }
 
-#tasks {
+#tasks, #books {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-input, select {
+input, select, form input, form select, #user-select-section select {
     width: 100%;
     padding: 12px;
     border: 1.5px solid #e3eaf3;
@@ -87,6 +74,7 @@ input, select {
     font-size: 15px;
     background: #f8fafc;
     transition: border-color 0.2s;
+    margin-bottom: 0;
 }
 
 input:focus, select:focus {
@@ -95,8 +83,7 @@ input:focus, select:focus {
     outline: none;
 }
 
-button, .delete-button {
-    width: 100%;
+button, .delete-button, #user-select-section button {
     background: #34495e;
     color: #fff;
     border: none;
@@ -108,6 +95,7 @@ button, .delete-button {
     transition: background 0.18s, transform 0.15s;
     margin-top: 8px;
     box-shadow: 0 2px 8px rgba(45,137,239,0.07);
+    width: 100%;
 }
 
 button:hover, .delete-button:hover {
@@ -116,29 +104,24 @@ button:hover, .delete-button:hover {
 }
 
 .delete-button {
-    background: #34495e;
     margin-top: 10px;
 }
 
-.delete-button:hover {
-    background: #34495e;
-}
-
-#tasks .task {
+#tasks .task, .task {
     background: #f8fafc;
     border: 1.5px solid #e3eaf3;
-    padding: 18px 16px 12px 16px;
+    padding: 18px 16px 12px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(45,137,239,0.04);
     transition: box-shadow 0.18s, transform 0.18s;
 }
 
-#tasks .task:hover {
+#tasks .task:hover, .task:hover {
     box-shadow: 0 4px 16px rgba(45,137,239,0.10);
     transform: translateY(-2px) scale(1.01);
 }
 
-#tasks .task strong {
+#tasks .task strong, .task strong {
     font-size: 1.1rem;
     color: #34495e;
     font-weight: 700;
@@ -146,7 +129,7 @@ button:hover, .delete-button:hover {
     display: block;
 }
 
-#tasks .task span {
+#tasks .task span, .task span {
     font-size: 14px;
     color: #34495e;
     margin: 2px 0;
@@ -198,38 +181,21 @@ button:hover, .delete-button:hover {
     transform: rotate(45deg);
 }
 
-#books {
-    margin-top: 10px;
+#user-select-section {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
-.task {
-    background: #f8fafc;
-    border: 1.5px solid #e3eaf3;
-    padding: 18px 16px 12px 16px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(45,137,239,0.04);
-    transition: box-shadow 0.18s, transform 0.18s;
+#book-dropdown {
+    flex: 1;
+    min-width: 0;
 }
 
-.task:hover {
-    box-shadow: 0 4px 16px rgba(45,137,239,0.10);
-    transform: translateY(-2px) scale(1.01);
-}
-
-.task strong {
-    font-size: 1.1rem;
-    color: #34495e;
-    font-weight: 700;
-    margin-bottom: 2px;
-    display: block;
-}
-
-.task span {
-    font-size: 14px;
-    color: #34495e;
-    margin: 2px 0;
-    display: block;
+#user-select-section button {
+    width: auto;
+    padding: 10px 18px;
+    margin-top: 0;
+    margin-left: 4px;
 }

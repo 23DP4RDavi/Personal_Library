@@ -11,7 +11,10 @@
     <div class="header-bar">
       <div class="greeting-logout">
         <span id="greeting"></span>
-        <button id="logout-btn" class="logout-btn">Logout</button>
+      </div>
+      <div style="margin-top:10px;">
+        <button type="button" onclick="loginAdmin()">Admin Mode</button>
+        <button type="button" class="admin-settings" onclick="setAdmin(false)">User Mode</button>
       </div>
     </div>
     <h1>My Library</h1>
@@ -20,12 +23,12 @@
       <input id="author" type="text" placeholder="Author" required>
       <input id="year" type="number" placeholder="Year" required>
       <input id="genre" type="text" placeholder="Genre" required>
-      <label class="read-label">
-        <input id="read" type="checkbox" class="read-checkbox">
-        Read
-      </label>
       <button type="button" onclick="addBook()">Add Book</button>
     </form>
+    <div id="user-select-section">
+      <select id="book-dropdown"></select>
+      <button type="button" onclick="selectBookFromDropdown()">Select Book</button>
+    </div>
     <div id="books"></div>
   </div>
   <script src="script.js"></script>
