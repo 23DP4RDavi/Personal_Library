@@ -1,75 +1,56 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../models/Book');
-const jwt = require('jsonwebtoken');
+const Book = require('../models/Book');
 
-const JWT_SECRET = 'your_jwt_secret';
-
-// JWT middleware
-function auth(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ error: 'No token provided' });
-    }
-    const token = authHeader.split(' ')[1];
+// GET all books
+router.get('/', async (req, res) => {
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.userId = decoded.userId;
-        next();
-    } catch (err) {
-        res.status(401).json({ error: 'Invalid token' });
-    }
-}
-
-// GET all tasks for the logged-in user
-router.get('/', auth, async (req, res) => {
-    try {
-        const tasks = await Task.find({ userId: req.userId });
-        res.json(tasks);
+        const books = await Book.find();
+        res.json(books);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch tasks' });
+        res.status(500).json({ error: 'Failed to fetch books' });
     }
 });
 
-// POST a new task for the logged-in user
-router.post('/', auth, async (req, res) => {
-    const { title, description, status, urgency } = req.body;
-    if (!title || !description) {
-        return res.status(400).json({ error: 'Title and description are required' });
+// POST a new book
+router.post('/', async (req, res) => {
+    const { title, author, year, genre, read } = req.body;
+    if (!title || !author || !year || !genre) {
+        return res.status(400).json({ error: 'All fields are required' });
     }
     try {
-        const task = new Task({ title, description, status, urgency, userId: req.userId });
-        await task.save();
-        res.status(201).json(task);
+        const book = new Book({ title, author, year, genre, read });
+        await book.save();
+        res.status(201).json(book);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create task' });
+        res.status(500).json({ error: 'Failed to create book' });
     }
 });
 
-// PUT (update) a task (only if it belongs to the user)
-router.put('/:id', auth, async (req, res) => {
-    const { title, description, status, urgency } = req.body;
+// PUT (update) a book
+router.put('/:id', async (req, res) => {
+    const { title, author, year, genre, read } = req.body;
     try {
-        const task = await Task.findOneAndUpdate(
-            { _id: req.params.id, userId: req.userId },
-            { title, description, status, urgency },
+        const book = await Book.findByIdAndUpdate(
+            req.params.id,
+            { title, author, year, genre, read },
             { new: true }
         );
-        if (!task) return res.status(404).json({ error: 'Task not found' });
-        res.json(task);
+        if (!book) return res.status(404).json({ error: 'Book not found' });
+        res.json(book);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update task' });
+        res.status(500).json({ error: 'Failed to update book' });
     }
 });
 
-// DELETE a task (only if it belongs to the user)
-router.delete('/:id', auth, async (req, res) => {
+// DELETE a book
+router.delete('/:id', async (req, res) => {
     try {
-        const task = await Task.findOneAndDelete({ _id: req.params.id, userId: req.userId });
-        if (!task) return res.status(404).json({ error: 'Task not found' });
-        res.json({ message: 'Task deleted successfully' });
+        const book = await Book.findByIdAndDelete(req.params.id);
+        if (!book) return res.status(404).json({ error: 'Book not found' });
+        res.json({ message: 'Book deleted successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete task' });
+        res.status(500).json({ error: 'Failed to delete book' });
     }
 });
 

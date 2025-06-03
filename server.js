@@ -10,7 +10,7 @@ const PORT = 3000;
 app.use(cors());
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://user:Fifa0000@cluster0.myeqn.mongodb.net/todo-app?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://user:Fifa0000@cluster0.myeqn.mongodb.net/Books?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -21,7 +21,7 @@ mongoose.connect('mongodb+srv://user:Fifa0000@cluster0.myeqn.mongodb.net/todo-ap
 app.use(express.json());
 
 // API routes
-app.use('/api/book', require('./routes/book'));
+app.use('/api/tasks', require('./routes/tasks'));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));

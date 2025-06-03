@@ -1,126 +1,94 @@
 const API_URL = 'http://localhost:3000/api/tasks';
 
-if (!localStorage.getItem('token')) {
-    window.location.href = '/login/login.html';
-}
-
-// Show greeting with username
-const username = localStorage.getItem('username');
-if (username) {
-    document.getElementById('greeting').innerText = `Hello, ${username} ! :)`;
-}
-
-// Load tasks and render them
-async function loadTasks() {
+// Load books and render them
+async function loadBooks() {
     try {
-        const res = await fetch(API_URL, { headers: getAuthHeaders() });
-        if (!res.ok) throw new Error(`Failed to fetch tasks: ${res.statusText}`);
-        const tasks = await res.json();
-        document.getElementById('tasks').innerHTML = tasks.map(renderTask).join('');
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error(`Failed to fetch books: ${res.statusText}`);
+        const books = await res.json();
+        document.getElementById('books').innerHTML = books.map(renderBook).join('');
     } catch (error) {
-        console.error('Error loading tasks:', error);
+        console.error('Error loading books:', error);
     }
 }
 
-// Render a single task
-function renderTask(task) {
+// Render a single book
+function renderBook(book) {
     return `
         <div class="task">
-            <strong>${task.title}</strong><br>
-            Description: ${task.description}<br>
-            Status: ${renderSelect('status', task._id, task.status, ['not started', 'started', 'almost done', 'finished'])}<br>
-            Urgency: ${renderSelect('urgency', task._id, task.urgency, ['low', 'medium', 'high'])}<br>
-            <button class="delete-button" onclick="deleteTask('${task._id}')">Delete</button>
+            <strong>${book.title}</strong><br>
+            Author: ${book.author}<br>
+            Year: ${book.year}<br>
+            Genre: ${book.genre}<br>
+            Read: <input type="checkbox" ${book.read ? 'checked' : ''} onchange="toggleRead('${book._id}', this.checked)">
+            <button class="delete-button" onclick="deleteBook('${book._id}')">Delete</button>
         </div>
     `;
 }
 
-// Render a dropdown select
-function renderSelect(field, id, currentValue, options) {
-    return `
-        <select onchange="updateTaskField('${id}', '${field}', this.value)">
-            ${options.map(option => `
-                <option value="${option}" ${option === currentValue ? 'selected' : ''}>${capitalize(option)}</option>
-            `).join('')}
-        </select>
-    `;
-}
-
-// Add a new task
-async function addTask() {
+// Add a new book
+async function addBook() {
     const title = document.getElementById('title').value.trim();
-    const description = document.getElementById('description').value.trim();
-    const status = document.getElementById('status').value;
-    const urgency = document.getElementById('urgency').value;
+    const author = document.getElementById('author').value.trim();
+    const year = parseInt(document.getElementById('year').value, 10);
+    const genre = document.getElementById('genre').value.trim();
+    const read = document.getElementById('read').checked;
 
-    if (!title || !description) {
-        alert('Title and description are required!');
+    if (!title || !author || !year || !genre) {
+        alert('All fields are required!');
         return;
     }
 
     try {
         await fetch(API_URL, {
             method: 'POST',
-            headers: getAuthHeaders(),
-            body: JSON.stringify({ title, description, status, urgency })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, author, year, genre, read })
         });
         clearForm();
-        loadTasks();
+        loadBooks();
     } catch (error) {
-        console.error('Error adding task:', error);
+        console.error('Error adding book:', error);
     }
 }
 
-// Update a specific field of a task
-async function updateTaskField(id, field, value) {
+// Toggle read status
+async function toggleRead(id, read) {
     try {
         await fetch(`${API_URL}/${id}`, {
             method: 'PUT',
-            headers: getAuthHeaders(),
-            body: JSON.stringify({ [field]: value })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ read })
         });
-        loadTasks();
+        loadBooks();
     } catch (error) {
-        console.error(`Error updating task ${id}:`, error);
+        console.error(`Error updating book ${id}:`, error);
     }
 }
 
-// Delete a task
-async function deleteTask(id) {
-    if (!confirm('Are you sure you want to delete this task?')) return;
+// Delete a book
+async function deleteBook(id) {
+    if (!confirm('Are you sure you want to delete this book?')) return;
 
     try {
-        await fetch(`${API_URL}/${id}`, { method: 'DELETE', headers: getAuthHeaders() });
-        loadTasks();
+        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+        loadBooks();
     } catch (error) {
-        console.error(`Error deleting task ${id}:`, error);
+        console.error(`Error deleting book ${id}:`, error);
     }
 }
 
 // Clear the form inputs
 function clearForm() {
     document.getElementById('title').value = '';
-    document.getElementById('description').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('year').value = '';
+    document.getElementById('genre').value = '';
+    document.getElementById('read').checked = false;
 }
 
-// Capitalize the first letter of a string
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-// Get authorization headers
-function getAuthHeaders() {
-    const token = localStorage.getItem('token');
-    return token
-        ? { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-        : { 'Content-Type': 'application/json' };
-}
-
-// Logout functionality
-document.getElementById('logout-btn').onclick = function() {
-    localStorage.removeItem('token');
-    window.location.href = '../login/login.html';
-};
+// Remove logout button functionality
+document.getElementById('logout-btn').style.display = 'none';
 
 // Initial load
-loadTasks();
+loadBooks();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo App</title>
+  <title>Personal Library</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,24 +14,19 @@
         <button id="logout-btn" class="logout-btn">Logout</button>
       </div>
     </div>
-    <h1>Todo List</h1>
-    <form id="task-form">
-      <input id="title" type="text" placeholder="Enter task title" required>
-      <input id="description" type="text" placeholder="Enter task description" required>
-      <select id="status">
-        <option value="not started">Not Started</option>
-        <option value="started">Started</option>
-        <option value="almost done">Almost Done</option>
-        <option value="finished">Finished</option>
-      </select>
-      <select id="urgency">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-      <button type="button" onclick="addTask()">Add Task</button>
+    <h1>My Library</h1>
+    <form id="book-form">
+      <input id="title" type="text" placeholder="Book Title" required>
+      <input id="author" type="text" placeholder="Author" required>
+      <input id="year" type="number" placeholder="Year" required>
+      <input id="genre" type="text" placeholder="Genre" required>
+      <label>
+        <input id="read" type="checkbox">
+        Read
+      </label>
+      <button type="button" onclick="addBook()">Add Book</button>
     </form>
-    <div id="tasks"></div>
+    <div id="books"></div>
   </div>
   <script src="script.js"></script>
 </body>
